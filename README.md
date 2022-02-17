@@ -1,34 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Phantasm Frontend
 
-## Getting Started
+**Phantasm Is Still In Development. Do not use mainnet funds.**
 
-First, run the development server:
+First, to install depencies locally, run:
 
 ```bash
-npm run dev
-# or
+yarn
+```
+
+## Create Environment Variables
+
+Once all dependencies are installed, it's time to connect to your Moralis Server.
+
+Create a Moralis Account at [https://moralis.io/](https://moralis.io/).
+Spin up a server on all available mainnets.
+
+Now that you have an active Moralis server, you should connect the front-end to it:
+
+- Create a file named `.env.local` in the root directory.
+- Create The following variables & copy the Moralis App ID and Server URL values to the `.env.local` file, as shown below:
+
+```
+NEXT_PUBLIC_REACT_APP_MORALIS_APP_ID=<Insert Your Moralis App ID Here>
+NEXT_PUBLIC_REACT_APP_MORALIS_SERVER_URL=<Insert Your Moralis Server URL Here>
+```
+
+(_arrows brackets: <>, and quotes " " / ' ' are unnecessary_)
+
+## Run Phantasm
+
+Now should be able to run the dapp in a local development server.
+
+In the command line, run:
+
+```bash
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Open [http://localhost:3000](http://localhost:3000) in your browser to interact with Phantasm.
