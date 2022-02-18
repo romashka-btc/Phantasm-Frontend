@@ -11,7 +11,7 @@ export const MainPage = () => {
 	const [stablecoinAddress, setStablecoinAddress] = useState<string>("0x6B175474E89094C44Da98b954EedeAC495271d0F"); // DAI
 	const [stablecoinSymbol, setStablecoinSymbol] = useState<string>("DAI");
 	const [collateralAmount, setCollateralAmount] = useState<number>(0);
-	const [borrowFactor, setBorrowFactor] = useState<number>(50);
+	const [borrowFactor, setBorrowFactor] = useState<number>(20);
 	const [isInsured, setIsInsured] = useState<boolean>(false);
 
 	return (

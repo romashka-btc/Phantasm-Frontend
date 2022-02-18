@@ -16,7 +16,7 @@ const Home: NextPage = () => {
 				<Tabs variant="line">
 					<TabList pl="10%">
 						<Tab>Create Position</Tab>
-						<Tab>My Positions</Tab>
+						<Tab id="my-positions-tab">My Positions</Tab>
 					</TabList>
 					<TabPanels>
 						<TabPanel>

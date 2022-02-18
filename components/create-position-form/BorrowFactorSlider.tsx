@@ -1,11 +1,14 @@
-import { Slider, SliderMark, SliderTrack, SliderFilledTrack, SliderThumb, Box, Container } from "@chakra-ui/react";
+import { Slider, SliderMark, SliderTrack, SliderFilledTrack, SliderThumb, Box, Container, Text } from "@chakra-ui/react";
 import { BorrowFactorTypes } from "../../types/BorrowFactor.types";
 import { DragHandleIcon } from "@chakra-ui/icons";
 
 export const BorrowFactorSlider = ({ borrowFactor, setBorrowFactor }: BorrowFactorTypes) => {
 	return (
 		<Container>
-			<Slider aria-label="slider-ex-6" onChange={(val) => setBorrowFactor(val)}>
+			<Text marginBottom="36px">
+				<strong>Leverage Amount</strong>
+			</Text>
+			<Slider aria-label="slider-ex-6" onChange={(val) => setBorrowFactor(val)} min={10} value={borrowFactor}>
 				<SliderMark value={25} mt="3" ml="-2.5" fontSize="sm">
 					2.5x
 				</SliderMark>

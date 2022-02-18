@@ -15,19 +15,19 @@ export const InfoBox = ({ isLong, collateralAmount, assetSymbol, stablecoinSymbo
 				<ListItem>
 					<ListIcon as={MinusIcon} color="green.500" />
 					{collateralAmount}
-					{isLong ? assetSymbol : stablecoinSymbol} collateral deposit into Aave
+					{isLong ? assetSymbol : stablecoinSymbol} collateral deposit
 				</ListItem>
 				<ListItem>
 					<ListIcon as={AddIcon} color="green.500" />
-					<Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" /> {isLong ? "DAI" : assetSymbol} loan from Aave
+					<Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" /> {isLong ? "DAI" : assetSymbol} loan
 				</ListItem>
 				<ListItem>
 					<ListIcon as={RepeatIcon} color="green.500" />
-					Swap <Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" /> {isLong ? "DAI" : assetSymbol} for <Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" /> {isLong ? assetSymbol : "DAI"} in Uniswap
+					Swap <Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" /> {isLong ? "DAI" : assetSymbol} for <Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" /> {isLong ? assetSymbol : "DAI"}
 				</ListItem>
 				<ListItem>
 					<ListIcon as={CheckCircleIcon} color="green.500" />
-					Total Debt: <Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" /> {isLong ? "DAI" : assetSymbol} from Aave
+					Total Debt: <Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" /> {isLong ? "DAI" : assetSymbol}
 				</ListItem>
 			</List>
 		</Container>

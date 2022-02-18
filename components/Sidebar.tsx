@@ -28,13 +28,13 @@ export const Sidebar = ({ isLong, assetAddress, assetSymbol, assetLogo, stableco
 			<Box borderLeft="1px solid" borderColor="#161522" pl="20px">
 				<InfoOutlineIcon mb="12px" w={5} h={5} />
 				<Text verticalAlign="bottom" fontSize="m">
-					{borrowFactor / 10}x {isInsured && "insured"} leveraged <strong>{isLong ? "long" : "short"}</strong> position on <Image display="inline" align="" boxSize="1rem" src={assetLogo} />
+					{borrowFactor / 10}x {isInsured && "insured"} leveraged <strong>{isLong ? "long" : "short"}</strong> position on <Image display="inline" boxSize="1rem" src={assetLogo} />
 					<strong>
 						{"  "}
 						{isLong && collateralAmount}
 						{assetSymbol}
 					</strong>
-					{!isLong && ` from a ${collateralAmount}${stablecoinSymbol} collateral deposit to Aave.`}
+					{!isLong && ` from a ${collateralAmount}${stablecoinSymbol} collateral deposit.`}
 				</Text>
 			</Box>
 		</Container>

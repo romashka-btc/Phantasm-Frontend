@@ -41,7 +41,7 @@ export const CollateralInput = ({ isLong, assetSymbol, assetLogo, stablecoinAddr
 			<Flex>
 				<FormControl width="60%">
 					<Input type="number" min={0} placeholder="0.0" border="1px solid" borderColor="#161522" borderRadius="0.25rem" height="50px" maxHeight="50px" value={collateralAmount} onChange={(event) => setCollateralAmount(parseFloat(event.target.value))} />
-					<FormHelperText>{isLong ? assetSymbol : stablecoinSymbol} sent to lender.</FormHelperText>
+					{/* <FormHelperText>{isLong ? assetSymbol : stablecoinSymbol} sent to lender.</FormHelperText> */}
 				</FormControl>
 				<Menu>
 					<MenuButton as={Button} borderRadius="0.25rem" rightIcon={<ChevronDownIcon />} border="1px solid" borderColor="#161522" background="black" paddingY="24px" height="50px" disabled={isLong ? true : false}>

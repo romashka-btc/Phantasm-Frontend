@@ -1,5 +1,6 @@
-import { Container, Switch, FormControl, FormLabel, Box, Skeleton } from "@chakra-ui/react";
+import { Container, Switch, FormControl, FormLabel, Box, Skeleton, List, ListItem, ListIcon } from "@chakra-ui/react";
 import { InsuranceTypes } from "../../types/Insurance.types";
+import { LockIcon, PlusSquareIcon } from "@chakra-ui/icons";
 
 export const InsuranceSelect = ({ isInsured, setIsInsured }: InsuranceTypes) => {
 	return (
@@ -21,9 +22,16 @@ export const InsuranceSelect = ({ isInsured, setIsInsured }: InsuranceTypes) => 
 				/>
 			</FormControl>
 			{isInsured && (
-				<Box color="white" border="1px solid" borderColor="#161522" borderRadius="0.25rem" padding="12px">
-					There is $<Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" /> worth of <strong>yield tokens</strong> to buy to insure your position.
-				</Box>
+				<List spacing={3} border="1px solid" borderColor="#161522" borderRadius="0.25rem" p="12px" fontSize="sm">
+					<ListItem>
+						<ListIcon as={PlusSquareIcon} color="green.500" />
+						<strong>Total Borrowings:</strong> $ <Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" />
+					</ListItem>
+					<ListItem>
+						<ListIcon as={LockIcon} color="green.500" />
+						<strong>Available Insurance:</strong> $ <Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" />
+					</ListItem>
+				</List>
 			)}
 		</Container>
 	);

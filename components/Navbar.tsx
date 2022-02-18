@@ -89,7 +89,7 @@ export const Navbar = () => {
 							</Button>
 						)}
 						{!isAuthenticated && (
-							<Button onClick={handleAuthenticate} variant={"solid"} colorScheme={"teal"} size={"sm"} mr={4} leftIcon={<UnlockIcon />}>
+							<Button onClick={handleAuthenticate} variant={"solid"} background="linear-gradient(90deg, #352db8, #ff5ea7)" borderRadius="0.25rem" size={"sm"} mr={4} leftIcon={<UnlockIcon />}>
 								Connect Wallet
 							</Button>
 						)}
@@ -98,7 +98,7 @@ export const Navbar = () => {
 								<MenuButton as={Button} rounded={"full"} variant={"link"} cursor={"pointer"} minW={0}>
 									<Avatar size={"sm"} />
 								</MenuButton>
-								<MenuList>
+								<MenuList borderRadius="0.25rem" backgroundColor="#161522">
 									<MenuItem>
 										<ViewIcon mr={2} />
 										My Positions

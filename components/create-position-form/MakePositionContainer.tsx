@@ -6,7 +6,7 @@ import { CollateralTypes } from "../../types/Collateral.types";
 import { InsuranceTypes } from "../../types/Insurance.types";
 import { AssetSelector } from "./AssetSelector";
 import { SideSelector } from "./SideSelector";
-import { ExecuteButton } from "./ExecuteButton";
+import { ExecuteModal } from "./ExecuteModal";
 import { InsuranceSelect } from "./InsuranceSelect";
 import { BorrowFactorSlider } from "./BorrowFactorSlider";
 import { InfoBox } from "./InfoBox";
@@ -54,7 +54,7 @@ export const MakePositionContainer = ({ isLong, setIsLong, assetAddress, setAsse
 				</Box>
 			</Flex>
 
-			<Flex margin="12px" marginTop="28px" marginBottom="42px">
+			<Flex margin="12px" marginTop="28px" marginBottom="28px">
 				<Box w="30%" pt="5px"></Box>
 				<Spacer />
 				<Box w="60%">
@@ -62,12 +62,12 @@ export const MakePositionContainer = ({ isLong, setIsLong, assetAddress, setAsse
 				</Box>
 			</Flex>
 
-			<Flex margin="12px">
+			<Flex margin="12px" marginBottom="42px">
 				<Box w="30%" pt="5px">
 					<Heading fontSize="xl" mb="10px">
 						Step 4
 					</Heading>
-					<Text fontSize="sm">Select Borrow Factor</Text>
+					<Text fontSize="sm">Select Leverage Amount</Text>
 				</Box>
 				<Spacer />
 				<Box w="60%">
@@ -92,7 +92,7 @@ export const MakePositionContainer = ({ isLong, setIsLong, assetAddress, setAsse
 				<Box w="30%" pt="5px"></Box>
 				<Spacer />
 				<Box w="60%">
-					<ExecuteButton />
+					<ExecuteModal isLong={isLong} assetAddress={assetAddress} assetSymbol={assetSymbol} assetLogo={assetLogo} borrowFactor={borrowFactor} stablecoinAddress={stablecoinAddress} stablecoinSymbol={stablecoinSymbol} collateralAmount={collateralAmount} isInsured={isInsured} />
 				</Box>
 			</Flex>
 		</Container>

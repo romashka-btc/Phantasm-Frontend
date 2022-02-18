@@ -1,9 +1,20 @@
 import { Button, useToast } from "@chakra-ui/react";
 import { useMoralis } from "react-moralis";
+import { ExecuteModal } from "./ExecuteModal";
 
-type ExecuteButtonTypes = {};
+type ExecuteButtonTypes = {
+	isLong: boolean;
+	assetAddress: string;
+	assetSymbol: string;
+	assetLogo: string | undefined;
+	borrowFactor: number;
+	stablecoinAddress: string;
+	stablecoinSymbol: string;
+	collateralAmount: number;
+	isInsured: boolean;
+};
 
-export const ExecuteButton = () => {
+export const ExecuteButton = ({ isLong, assetAddress, assetSymbol, assetLogo, borrowFactor, stablecoinAddress, stablecoinSymbol, collateralAmount, isInsured }: ExecuteButtonTypes) => {
 	const { Moralis, isAuthenticated, authenticate } = useMoralis();
 	const toast = useToast();
 
@@ -49,8 +60,11 @@ export const ExecuteButton = () => {
 	};
 
 	return (
-		<Button onClick={isAuthenticated ? () => executePosition : () => authenticate()} width="100%" background="linear-gradient(90deg, #352db8, #ff5ea7)" borderRadius="0.25rem">
-			{isAuthenticated ? "Execute Position" : "Connect Wallet"}
-		</Button>
+		<>
+			<Button onClick={isAuthenticated ? () => executePosition : () => authenticate()} width="100%" background="linear-gradient(90deg, #352db8, #ff5ea7)" borderRadius="0.25rem">
+				{isAuthenticated ? "Execute Position" : "Connect Wallet"}
+			</Button>
+			<ExecuteModal isLong={isLong} assetAddress={assetAddress} assetSymbol={assetSymbol} assetLogo={assetLogo} borrowFactor={borrowFactor} stablecoinAddress={stablecoinAddress} stablecoinSymbol={stablecoinSymbol} collateralAmount={collateralAmount} isInsured={isInsured} />
+		</>
 	);
 };
