@@ -15,4 +15,6 @@ export type StablecoinTypes = {
 	setStablecoinAddress: React.Dispatch<React.SetStateAction<string>>;
 	stablecoinSymbol: string;
 	setStablecoinSymbol: React.Dispatch<React.SetStateAction<string>>;
+	stablecoinLogo: string | undefined;
+	setStablecoinLogo: React.Dispatch<React.SetStateAction<string | undefined>>;
 };

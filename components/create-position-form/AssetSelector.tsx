@@ -69,7 +69,7 @@ export const AssetSelector = ({ assetAddress, setAssetAddress, assetSymbol, setA
 	return (
 		<Container>
 			<Menu>
-				<MenuButton as={Button} borderRadius="0.25rem" rightIcon={<ChevronDownIcon />} border="1px solid" borderColor="#161522" background="black" paddingY="24px">
+				<MenuButton as={Button} borderRadius="0.25rem" rightIcon={<ChevronDownIcon />} border="1px solid" borderColor="#161522" background="black" paddingY="24px" _active={{ background: "linear-gradient(150deg, #352db8, #ff5ea7)" }} _hover={{ background: "transparent" }}>
 					<Flex align="center">
 						<Image boxSize="2rem" borderRadius="full" src={assetLogo} mr="12px" />
 						{assetSymbol}

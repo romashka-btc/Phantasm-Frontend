@@ -1,6 +1,7 @@
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, List, ListItem, ListIcon, Image, useDisclosure, useToast } from "@chakra-ui/react";
 import { EditIcon, PlusSquareIcon, LockIcon } from "@chakra-ui/icons";
-import { useMoralis } from "react-moralis";
+import { useMoralis, useChain } from "react-moralis";
+import Link from "next/link";
 
 type ExecuteModalTypes = {
 	isLong: boolean;
@@ -10,14 +11,18 @@ type ExecuteModalTypes = {
 	borrowFactor: number;
 	stablecoinAddress: string;
 	stablecoinSymbol: string;
+	stablecoinLogo: string | undefined;
 	collateralAmount: number;
 	isInsured: boolean;
+	insuranceAvailable: number | null | undefined;
+	borrowAPY: number | undefined;
 };
 
-export const ExecuteModal = ({ isLong, assetAddress, assetSymbol, assetLogo, borrowFactor, stablecoinAddress, stablecoinSymbol, collateralAmount, isInsured }: ExecuteModalTypes) => {
+export const ExecuteModal = ({ isLong, assetAddress, assetSymbol, assetLogo, borrowFactor, stablecoinAddress, stablecoinSymbol, stablecoinLogo, collateralAmount, isInsured, insuranceAvailable, borrowAPY }: ExecuteModalTypes) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { Moralis, isAuthenticated, authenticate } = useMoralis();
 	const toast = useToast();
+	const { chain } = useChain();
 
 	const executePosition = async () => {
 		const options = {
@@ -39,7 +44,11 @@ export const ExecuteModal = ({ isLong, assetAddress, assetSymbol, assetLogo, bor
 		if (hash) {
 			toast({
 				title: "Position Executed!",
-				description: "Click To View Transaction",
+				description: (
+					<Link href={`https://etherscan.io/${hash}`}>
+						<a target="_blank">Click To View Transaction</a>
+					</Link>
+				),
 				status: "success",
 				duration: 5000,
 				isClosable: true,
@@ -49,7 +58,11 @@ export const ExecuteModal = ({ isLong, assetAddress, assetSymbol, assetLogo, bor
 		} else if (!hash) {
 			toast({
 				title: "Transaction Error",
-				description: "Error Making Position",
+				description: (
+					<Link href={`https://etherscan.io/${hash}`}>
+						<a target="_blank">Error Making Position</a>
+					</Link>
+				),
 				status: "error",
 				duration: 5000,
 				isClosable: true,
@@ -62,7 +75,7 @@ export const ExecuteModal = ({ isLong, assetAddress, assetSymbol, assetLogo, bor
 
 	return (
 		<>
-			<Button onClick={!isAuthenticated ? () => authenticate({ signingMessage: "Sign This Message To Log In And Prove You Hold The Private Keys To This Wallet. This will not cost you any gas." }) : onOpen} width="100%" background="linear-gradient(90deg, #352db8, #ff5ea7)" borderRadius="0.25rem">
+			<Button _hover={{ background: "linear-gradient(150deg, #352db8, #ff5ea7)" }} onClick={!isAuthenticated ? () => authenticate({ signingMessage: "Sign This Message To Log In And Prove You Hold The Private Keys To This Wallet. This will not cost you any gas." }) : onOpen} width="100%" background="linear-gradient(90deg, #352db8, #ff5ea7)" borderRadius="0.25rem">
 				{isAuthenticated ? "Execute Position" : "Connect Wallet"}
 			</Button>
 
@@ -75,6 +88,10 @@ export const ExecuteModal = ({ isLong, assetAddress, assetSymbol, assetLogo, bor
 						<List spacing={3} p="12px" fontSize="sm">
 							<ListItem>
 								<ListIcon as={PlusSquareIcon} color="green.500" />
+								<strong>Chain: </strong> {chain?.name}
+							</ListItem>
+							<ListItem>
+								<ListIcon as={PlusSquareIcon} color="green.500" />
 								<strong>Position Side: </strong> {isLong ? "Long" : "Short"}
 							</ListItem>
 							<ListItem>
@@ -82,8 +99,18 @@ export const ExecuteModal = ({ isLong, assetAddress, assetSymbol, assetLogo, bor
 								<strong>{isLong ? "Long" : "Short"} Token: </strong> <Image display="inline" boxSize="1rem" src={assetLogo} /> {assetSymbol}
 							</ListItem>
 							<ListItem>
+								<ListIcon as={PlusSquareIcon} color="green.500" />
+								<strong>Collateral Provided: </strong> <Image display="inline" boxSize="1rem" src={isLong ? assetLogo : stablecoinLogo} /> {collateralAmount}
+								{isLong ? assetSymbol : stablecoinSymbol}
+							</ListItem>
+							<ListItem>
+								<ListIcon as={PlusSquareIcon} color="green.500" />
+								<strong>Total Borrowings: </strong> <Image display="inline" boxSize="1rem" src={isLong ? stablecoinLogo : assetLogo} /> 100
+								{isLong ? stablecoinSymbol : assetSymbol}
+							</ListItem>
+							<ListItem>
 								<ListIcon as={LockIcon} color="green.500" />
-								<strong>Collateral Amount: </strong> {isLong && <Image display="inline" boxSize="1rem" src={assetLogo} />}
+								<strong>Borrowing Interest Rate: </strong> {borrowAPY && (borrowAPY * 100).toFixed(2)}% APY
 							</ListItem>
 							<ListItem>
 								<ListIcon as={LockIcon} color="green.500" />
@@ -92,7 +119,7 @@ export const ExecuteModal = ({ isLong, assetAddress, assetSymbol, assetLogo, bor
 							{isInsured && (
 								<ListItem>
 									<ListIcon as={LockIcon} color="green.500" />
-									<strong>Available Insurance: </strong> $100
+									<strong>Available Insurance: </strong> ${insuranceAvailable}
 								</ListItem>
 							)}
 						</List>
@@ -103,7 +130,7 @@ export const ExecuteModal = ({ isLong, assetAddress, assetSymbol, assetLogo, bor
 							<EditIcon mr="12px" /> Edit
 						</Button>
 						{isAuthenticated && (
-							<Button onClick={executePosition} background="linear-gradient(90deg, #352db8, #ff5ea7)" borderRadius="0.25rem">
+							<Button onClick={executePosition} background="linear-gradient(90deg, #352db8, #ff5ea7)" borderRadius="0.25rem" _hover={{ background: "linear-gradient(150deg, #352db8, #ff5ea7)" }}>
 								Confirm Transaction
 							</Button>
 						)}

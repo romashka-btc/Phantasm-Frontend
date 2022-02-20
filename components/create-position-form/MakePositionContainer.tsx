@@ -11,8 +11,10 @@ import { InsuranceSelect } from "./InsuranceSelect";
 import { BorrowFactorSlider } from "./BorrowFactorSlider";
 import { InfoBox } from "./InfoBox";
 import { CollateralInput } from "./CollateralInput";
+import { BorrowRateTypes } from "../../types/BorrowRate.types";
+import { LoadingRatesTypes } from "../../types/Loading.types";
 
-export const MakePositionContainer = ({ isLong, setIsLong, assetAddress, setAssetAddress, assetSymbol, setAssetSymbol, assetLogo, setAssetLogo, borrowFactor, setBorrowFactor, stablecoinAddress, setStablecoinAddress, stablecoinSymbol, setStablecoinSymbol, collateralAmount, setCollateralAmount, isInsured, setIsInsured }: PositionSideTypes & AssetAddressTypes & AssetSymbolTypes & BorrowFactorTypes & StablecoinTypes & CollateralTypes & InsuranceTypes) => {
+export const MakePositionContainer = ({ isLong, setIsLong, assetAddress, setAssetAddress, assetSymbol, setAssetSymbol, assetLogo, setAssetLogo, borrowFactor, setBorrowFactor, stablecoinAddress, setStablecoinAddress, stablecoinSymbol, setStablecoinSymbol, stablecoinLogo, setStablecoinLogo, collateralAmount, setCollateralAmount, isInsured, setIsInsured, insuranceAvailable, setInsuranceAvailable, borrowAPY, setBorrowAPY, isLoadingRates }: PositionSideTypes & AssetAddressTypes & AssetSymbolTypes & BorrowFactorTypes & StablecoinTypes & CollateralTypes & InsuranceTypes & BorrowRateTypes & LoadingRatesTypes) => {
 	return (
 		<Container boxShadow="#a92258 0px 30px 42px -42px,  #3127a7 0px 50px 250px -47px" padding="20px" borderRadius="0.25rem" maxWidth="100%" border="1px solid" borderColor="#161522">
 			<Flex margin="12px">
@@ -50,7 +52,7 @@ export const MakePositionContainer = ({ isLong, setIsLong, assetAddress, setAsse
 				</Box>
 				<Spacer />
 				<Box w="60%">
-					<CollateralInput isLong={isLong} assetSymbol={assetSymbol} assetLogo={assetLogo} stablecoinAddress={stablecoinAddress} setStablecoinAddress={setStablecoinAddress} stablecoinSymbol={stablecoinSymbol} setStablecoinSymbol={setStablecoinSymbol} collateralAmount={collateralAmount} setCollateralAmount={setCollateralAmount} />
+					<CollateralInput isLong={isLong} assetSymbol={assetSymbol} assetLogo={assetLogo} stablecoinAddress={stablecoinAddress} setStablecoinAddress={setStablecoinAddress} stablecoinSymbol={stablecoinSymbol} setStablecoinSymbol={setStablecoinSymbol} stablecoinLogo={stablecoinLogo} setStablecoinLogo={setStablecoinLogo} collateralAmount={collateralAmount} setCollateralAmount={setCollateralAmount} />
 				</Box>
 			</Flex>
 
@@ -58,7 +60,7 @@ export const MakePositionContainer = ({ isLong, setIsLong, assetAddress, setAsse
 				<Box w="30%" pt="5px"></Box>
 				<Spacer />
 				<Box w="60%">
-					<InfoBox isLong={isLong} collateralAmount={collateralAmount} assetSymbol={assetSymbol} stablecoinSymbol={stablecoinSymbol} />
+					<InfoBox isLong={isLong} collateralAmount={collateralAmount} assetSymbol={assetSymbol} stablecoinSymbol={stablecoinSymbol} isLoadingRates={isLoadingRates} />
 				</Box>
 			</Flex>
 
@@ -84,7 +86,7 @@ export const MakePositionContainer = ({ isLong, setIsLong, assetAddress, setAsse
 				</Box>
 				<Spacer />
 				<Box w="60%">
-					<InsuranceSelect isInsured={isInsured} setIsInsured={setIsInsured} />
+					<InsuranceSelect isInsured={isInsured} setIsInsured={setIsInsured} insuranceAvailable={insuranceAvailable} setInsuranceAvailable={setInsuranceAvailable} isLoadingRates={isLoadingRates} />
 				</Box>
 			</Flex>
 
@@ -92,7 +94,7 @@ export const MakePositionContainer = ({ isLong, setIsLong, assetAddress, setAsse
 				<Box w="30%" pt="5px"></Box>
 				<Spacer />
 				<Box w="60%">
-					<ExecuteModal isLong={isLong} assetAddress={assetAddress} assetSymbol={assetSymbol} assetLogo={assetLogo} borrowFactor={borrowFactor} stablecoinAddress={stablecoinAddress} stablecoinSymbol={stablecoinSymbol} collateralAmount={collateralAmount} isInsured={isInsured} />
+					<ExecuteModal isLong={isLong} assetAddress={assetAddress} assetSymbol={assetSymbol} assetLogo={assetLogo} borrowFactor={borrowFactor} stablecoinAddress={stablecoinAddress} stablecoinSymbol={stablecoinSymbol} stablecoinLogo={stablecoinLogo} collateralAmount={collateralAmount} isInsured={isInsured} insuranceAvailable={insuranceAvailable} borrowAPY={borrowAPY} />
 				</Box>
 			</Flex>
 		</Container>

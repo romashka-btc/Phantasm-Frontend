@@ -17,14 +17,9 @@ type CollateralInputTypes = {
 	assetLogo: string | undefined;
 };
 
-export const CollateralInput = ({ isLong, assetSymbol, assetLogo, stablecoinAddress, setStablecoinAddress, stablecoinSymbol, setStablecoinSymbol, collateralAmount, setCollateralAmount }: CollateralInputTypes & StablecoinTypes & CollateralTypes) => {
-	const [stablecoinLogo, setStablecoinLogo] = useState<string | undefined>("https://etherscan.io/token/images/MCDDai_32.png");
-
+export const CollateralInput = ({ isLong, assetSymbol, assetLogo, stablecoinAddress, setStablecoinAddress, stablecoinSymbol, setStablecoinSymbol, stablecoinLogo, setStablecoinLogo, collateralAmount, setCollateralAmount }: CollateralInputTypes & StablecoinTypes & CollateralTypes) => {
 	useEffect(() => {
-		if (isLong) {
-			setStablecoinSymbol(assetSymbol);
-			setStablecoinLogo(assetLogo);
-		} else if (!isLong) {
+		if (!isLong) {
 			setStablecoinAddress(stablecoins[0].address);
 			setStablecoinSymbol(stablecoins[0].symbol);
 			setStablecoinLogo(stablecoins[0].logo);
@@ -44,9 +39,9 @@ export const CollateralInput = ({ isLong, assetSymbol, assetLogo, stablecoinAddr
 					{/* <FormHelperText>{isLong ? assetSymbol : stablecoinSymbol} sent to lender.</FormHelperText> */}
 				</FormControl>
 				<Menu>
-					<MenuButton as={Button} borderRadius="0.25rem" rightIcon={<ChevronDownIcon />} border="1px solid" borderColor="#161522" background="black" paddingY="24px" height="50px" disabled={isLong ? true : false}>
+					<MenuButton as={Button} borderRadius="0.25rem" rightIcon={<ChevronDownIcon />} border="1px solid" borderColor="#161522" background="black" paddingY="24px" height="50px" disabled={isLong ? true : false} _active={{ background: "linear-gradient(150deg, #352db8, #ff5ea7)" }} _hover={{ background: "transparent" }}>
 						<Flex align="center" marginRight="32px">
-							<Image boxSize="1.5rem" src={stablecoinLogo} mr="12px" />
+							<Image boxSize="1.5rem" src={isLong ? assetLogo : stablecoinLogo} mr="12px" />
 							{isLong ? assetSymbol : stablecoinSymbol}
 						</Flex>
 					</MenuButton>

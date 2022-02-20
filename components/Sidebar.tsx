@@ -1,4 +1,4 @@
-import { Container, Heading, Text, Box, Image, SkeletonText } from "@chakra-ui/react";
+import { Container, Heading, Text, Box, Image, Skeleton } from "@chakra-ui/react";
 import { PositionSideTypes } from "../types/PositionSide.types";
 import { AssetAddressTypes, AssetSymbolTypes } from "../types/Asset.types";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
@@ -12,17 +12,27 @@ type SideBarTypes = {
 	stablecoinSymbol: string;
 	collateralAmount: number;
 	isInsured: boolean;
+	insuranceAvailable: number | null | undefined;
+	borrowAPY: number | undefined;
+	isLoadingRates: boolean;
 };
 
-export const Sidebar = ({ isLong, assetAddress, assetSymbol, assetLogo, stablecoinSymbol, collateralAmount, borrowFactor, setBorrowFactor, isInsured }: SideBarTypes & BorrowFactorTypes) => {
+export const Sidebar = ({ isLong, assetAddress, assetSymbol, assetLogo, stablecoinSymbol, collateralAmount, borrowFactor, setBorrowFactor, isInsured, insuranceAvailable, borrowAPY, isLoadingRates }: SideBarTypes & BorrowFactorTypes) => {
 	return (
 		<Container padding="10">
-			<Heading as="h3" fontSize="xl">
-				{isLong ? "DAI" : assetSymbol} Estimated Borrow APY
-			</Heading>
-			<Text fontSize="5xl">
-				<strong>3.57%</strong>
-			</Text>
+			{borrowAPY && (
+				<>
+					<Heading as="h3" fontSize="xl">
+						{isLong ? "DAI" : assetSymbol} Estimated Borrow APY
+					</Heading>
+					<Skeleton isLoaded={!isLoadingRates} startColor="#2d2bbc" endColor="#ff5ea7">
+						<Text fontSize="5xl">
+							<strong>{(borrowAPY * 100).toFixed(2)}%</strong>
+						</Text>
+					</Skeleton>
+				</>
+			)}
+
 			{/* <Text fontSize="xl">Borrowed Token: DAI</Text> */}
 			<Box height="100px" />
 			<Box borderLeft="1px solid" borderColor="#161522" pl="20px">
@@ -36,6 +46,8 @@ export const Sidebar = ({ isLong, assetAddress, assetSymbol, assetLogo, stableco
 					</strong>
 					{!isLong && ` from a ${collateralAmount}${stablecoinSymbol} collateral deposit.`}
 				</Text>
+				<br />
+				<Text>{isInsured && `Insurance Available: $${insuranceAvailable}`}</Text>
 			</Box>
 		</Container>
 	);

@@ -19,7 +19,5 @@ export const useGetPools = async (/* tokenAddress */) => {
 		alert("There was an error getting insurance Pools:" + error);
 	}
 
-	console.log(tokenAddressList);
-	// console.log(tokenAddressList);
 	return { assetPools, tokens, tokenAddressList };
 };

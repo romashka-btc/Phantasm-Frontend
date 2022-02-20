@@ -1,6 +1,6 @@
 export const useGet88Graph = async () => {
 	const APIURL = "https://api.thegraph.com/subgraphs/name/bacon-labs/eighty-eight-mph-v3";
-	// This query is special => check out https://www.youtube.com/watch?v=PjyKPMpahuc
+
 	const query = `
         query
     `;

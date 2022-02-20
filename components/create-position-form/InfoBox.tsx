@@ -6,9 +6,10 @@ type InfoBoxTypes = {
 	collateralAmount: number;
 	assetSymbol: string;
 	stablecoinSymbol: string;
+	isLoadingRates: boolean;
 };
 
-export const InfoBox = ({ isLong, collateralAmount, assetSymbol, stablecoinSymbol }: InfoBoxTypes) => {
+export const InfoBox = ({ isLong, collateralAmount, assetSymbol, stablecoinSymbol, isLoadingRates }: InfoBoxTypes) => {
 	return (
 		<Container>
 			<List spacing={3} border="1px solid" borderColor="#161522" borderRadius="0.25rem" p="12px" fontSize="sm">
@@ -19,15 +20,30 @@ export const InfoBox = ({ isLong, collateralAmount, assetSymbol, stablecoinSymbo
 				</ListItem>
 				<ListItem>
 					<ListIcon as={AddIcon} color="green.500" />
-					<Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" /> {isLong ? "DAI" : assetSymbol} loan
+					<Skeleton display="inline-block" isLoaded={!isLoadingRates} startColor="#2d2bbc" endColor="#ff5ea7">
+						{" "}
+						{isLong ? "DAI" : assetSymbol} loan
+					</Skeleton>
 				</ListItem>
 				<ListItem>
 					<ListIcon as={RepeatIcon} color="green.500" />
-					Swap <Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" /> {isLong ? "DAI" : assetSymbol} for <Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" /> {isLong ? assetSymbol : "DAI"}
+					Swap{" "}
+					<Skeleton /* w="42px" height="14px" */ display="inline-block" isLoaded={!isLoadingRates} startColor="#2d2bbc" endColor="#ff5ea7">
+						{" "}
+						{isLong ? "DAI" : assetSymbol} for{" "}
+					</Skeleton>
+					<Skeleton /* w="42px" height="14px" */ display="inline-block" isLoaded={!isLoadingRates} startColor="#2d2bbc" endColor="#ff5ea7">
+						{" "}
+						{isLong ? assetSymbol : "DAI"}
+					</Skeleton>
 				</ListItem>
 				<ListItem>
 					<ListIcon as={CheckCircleIcon} color="green.500" />
-					Total Debt: <Skeleton w="42px" display="inline-block" height="14px" startColor="#2d2bbc" endColor="#ff5ea7" /> {isLong ? "DAI" : assetSymbol}
+					Total Debt:{" "}
+					<Skeleton /* w="42px" height="14px" */ display="inline-block" isLoaded={!isLoadingRates} startColor="#2d2bbc" endColor="#ff5ea7">
+						{" "}
+						{isLong ? "DAI" : assetSymbol}
+					</Skeleton>
 				</ListItem>
 			</List>
 		</Container>

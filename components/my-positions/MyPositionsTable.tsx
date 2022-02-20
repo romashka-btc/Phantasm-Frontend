@@ -47,7 +47,7 @@ export const MyPositionsTable = () => {
 								<Td>{convertUnixToDate(position.start)}</Td>
 								<Td>{convertUnixToDate(position.expiry)}</Td>
 								<Td>
-									<Button background="linear-gradient(90deg, #352db8, #ff5ea7)" isDisabled={position.status == "active" ? true : false}>
+									<Button background="linear-gradient(90deg, #352db8, #ff5ea7)" _hover={{ background: "linear-gradient(150deg, #352db8, #ff5ea7)" }} isDisabled={position.status == "active" ? true : false}>
 										Close Position
 									</Button>
 								</Td>
