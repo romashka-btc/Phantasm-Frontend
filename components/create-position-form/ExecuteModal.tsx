@@ -16,9 +16,11 @@ type ExecuteModalTypes = {
 	isInsured: boolean;
 	insuranceAvailable: number | null | undefined;
 	borrowAPY: number | undefined;
+	assetPrice: number | undefined;
+	stablecoinPrice: number | undefined;
 };
 
-export const ExecuteModal = ({ isLong, assetAddress, assetSymbol, assetLogo, borrowFactor, stablecoinAddress, stablecoinSymbol, stablecoinLogo, collateralAmount, isInsured, insuranceAvailable, borrowAPY }: ExecuteModalTypes) => {
+export const ExecuteModal = ({ isLong, assetAddress, assetSymbol, assetLogo, borrowFactor, stablecoinAddress, stablecoinSymbol, stablecoinLogo, collateralAmount, isInsured, insuranceAvailable, borrowAPY, assetPrice, stablecoinPrice }: ExecuteModalTypes) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { Moralis, isAuthenticated, authenticate } = useMoralis();
 	const toast = useToast();
@@ -85,44 +87,46 @@ export const ExecuteModal = ({ isLong, assetAddress, assetSymbol, assetLogo, bor
 					<ModalHeader>Confirm Position</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
-						<List spacing={3} p="12px" fontSize="sm">
-							<ListItem>
-								<ListIcon as={PlusSquareIcon} color="green.500" />
-								<strong>Chain: </strong> {chain?.name}
-							</ListItem>
-							<ListItem>
-								<ListIcon as={PlusSquareIcon} color="green.500" />
-								<strong>Position Side: </strong> {isLong ? "Long" : "Short"}
-							</ListItem>
-							<ListItem>
-								<ListIcon as={PlusSquareIcon} color="green.500" />
-								<strong>{isLong ? "Long" : "Short"} Token: </strong> <Image display="inline" boxSize="1rem" src={assetLogo} /> {assetSymbol}
-							</ListItem>
-							<ListItem>
-								<ListIcon as={PlusSquareIcon} color="green.500" />
-								<strong>Collateral Provided: </strong> <Image display="inline" boxSize="1rem" src={isLong ? assetLogo : stablecoinLogo} /> {collateralAmount}
-								{isLong ? assetSymbol : stablecoinSymbol}
-							</ListItem>
-							<ListItem>
-								<ListIcon as={PlusSquareIcon} color="green.500" />
-								<strong>Total Borrowings: </strong> <Image display="inline" boxSize="1rem" src={isLong ? stablecoinLogo : assetLogo} /> 100
-								{isLong ? stablecoinSymbol : assetSymbol}
-							</ListItem>
-							<ListItem>
-								<ListIcon as={LockIcon} color="green.500" />
-								<strong>Borrowing Interest Rate: </strong> {borrowAPY && (borrowAPY * 100).toFixed(2)}% APY
-							</ListItem>
-							<ListItem>
-								<ListIcon as={LockIcon} color="green.500" />
-								<strong>Insurance: </strong> {isInsured ? "Yes" : "No"}
-							</ListItem>
-							{isInsured && (
+						{assetPrice && stablecoinPrice && (
+							<List spacing={3} p="12px" fontSize="sm">
+								<ListItem>
+									<ListIcon as={PlusSquareIcon} color="green.500" />
+									<strong>Chain: </strong> {chain?.name}
+								</ListItem>
+								<ListItem>
+									<ListIcon as={PlusSquareIcon} color="green.500" />
+									<strong>Position Side: </strong> {isLong ? "Long" : "Short"}
+								</ListItem>
+								<ListItem>
+									<ListIcon as={PlusSquareIcon} color="green.500" />
+									<strong>{isLong ? "Long" : "Short"} Token: </strong> <Image display="inline" boxSize="1rem" src={assetLogo} /> {assetSymbol}
+								</ListItem>
+								<ListItem>
+									<ListIcon as={PlusSquareIcon} color="green.500" />
+									<strong>Collateral Provided: </strong> <Image display="inline" boxSize="1rem" src={isLong ? assetLogo : stablecoinLogo} /> {collateralAmount}
+									{isLong ? assetSymbol : stablecoinSymbol}
+								</ListItem>
+								<ListItem>
+									<ListIcon as={PlusSquareIcon} color="green.500" />
+									<strong>Total Borrowings: </strong> <Image display="inline" boxSize="1rem" src={isLong ? stablecoinLogo : assetLogo} /> {isLong ? (collateralAmount / assetPrice).toFixed(2) : (collateralAmount / stablecoinPrice).toFixed(2)}
+									{isLong ? stablecoinSymbol : assetSymbol}
+								</ListItem>
 								<ListItem>
 									<ListIcon as={LockIcon} color="green.500" />
-									<strong>Available Insurance: </strong> ${insuranceAvailable}
+									<strong>Borrowing Interest Rate: </strong> {borrowAPY && (borrowAPY * 100).toFixed(2)}% APY
 								</ListItem>
-							)}
-						</List>
+								<ListItem>
+									<ListIcon as={LockIcon} color="green.500" />
+									<strong>Insurance: </strong> {isInsured ? "Yes" : "No"}
+								</ListItem>
+								{isInsured && insuranceAvailable && (
+									<ListItem>
+										<ListIcon as={LockIcon} color="green.500" />
+										<strong>Available Insurance: </strong> ${insuranceAvailable.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+									</ListItem>
+								)}
+							</List>
+						)}
 					</ModalBody>
 
 					<ModalFooter>

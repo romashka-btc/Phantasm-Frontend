@@ -96,12 +96,12 @@ export const Navbar = () => {
 
 	return (
 		<>
-			<Box background="black" /* bg={useColorModeValue("gray.100", "gray.900")} */ px={28} borderBottom="1px solid #161522">
+			<Box background="black" px={28} borderBottom="1px solid #161522">
 				<Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
 					<IconButton size={"md"} icon={isOpen ? <CloseIcon /> : <HamburgerIcon />} aria-label={"Open Menu"} display={{ md: "none" }} onClick={isOpen ? onClose : onOpen} />
 					<HStack spacing={8} alignItems={"center"}>
 						<Box>
-							<Img /* src="../public/phantasm-logo.png" */ src={"/phantasm-logo.png"} width={50} height={50} />
+							<Img src={"/phantasm-logo.png"} width={50} height={50} />
 						</Box>
 						<HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
 							{Links.map((link) => (

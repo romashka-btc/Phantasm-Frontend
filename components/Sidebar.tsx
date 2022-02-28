@@ -12,7 +12,7 @@ type SideBarTypes = {
 	stablecoinSymbol: string;
 	collateralAmount: number;
 	isInsured: boolean;
-	insuranceAvailable: number | null | undefined;
+	insuranceAvailable: number;
 	borrowAPY: number | undefined;
 	isLoadingRates: boolean;
 };
@@ -47,7 +47,7 @@ export const Sidebar = ({ isLong, assetAddress, assetSymbol, assetLogo, stableco
 					{!isLong && ` from a ${collateralAmount}${stablecoinSymbol} collateral deposit.`}
 				</Text>
 				<br />
-				<Text>{isInsured && `Insurance Available: $${insuranceAvailable}`}</Text>
+				<Text>{isInsured && `Insurance Available: $${insuranceAvailable.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}</Text>
 			</Box>
 		</Container>
 	);

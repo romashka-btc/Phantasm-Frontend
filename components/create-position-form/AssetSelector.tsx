@@ -11,7 +11,7 @@ type AssetSelectorTypes = {
 	tokenAddressList: string[] | undefined;
 };
 
-export const AssetSelector = ({ assetAddress, setAssetAddress, assetSymbol, setAssetSymbol, assetLogo, setAssetLogo }: AssetAddressTypes & AssetSymbolTypes) => {
+export const AssetSelector = ({ assetAddress, setAssetAddress, assetSymbol, setAssetSymbol, assetLogo, setAssetLogo, assetDecimals, setAssetDecimals }: AssetAddressTypes & AssetSymbolTypes) => {
 	const { switchNetwork, chainId, chain } = useChain();
 	const { Moralis, isInitialized } = useMoralis();
 	const [tokenAddressList, setTokenAddressList] = useState<string[] | undefined>();
@@ -86,6 +86,7 @@ export const AssetSelector = ({ assetAddress, setAssetAddress, assetSymbol, setA
 									key={index}
 									minH="48px"
 									onClick={() => {
+										setAssetDecimals(token.decimals);
 										setAssetAddress(token.address);
 										setAssetSymbol(token.symbol);
 										setAssetLogo(token.logo);
