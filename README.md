@@ -2,7 +2,7 @@
 
 **Phantasm Is Still In Development. Do not use mainnet funds.**
 
-First, to install depencies locally, run:
+First, to install dependencies locally, run:
 
 ```bash
 yarn
